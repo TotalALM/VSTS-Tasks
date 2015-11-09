@@ -20,5 +20,5 @@ Follow the below steps to upload this task to your account:
 * Input Target Folder to extract the zip file into.
 * Remove Zip After Extraction - When checked, the zip file will be removed after the extraction is complete.
 
-![tfs-cli](docs/TokenizationValues.png "Options")
+![tfs-cli](docs/Values.png "Options")
 
