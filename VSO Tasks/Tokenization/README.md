@@ -12,12 +12,12 @@ Follow the below steps to upload this task to your account:
 
 ## How to use
 
-1. Add a new task and select Tokenization.
+* Add a new task and select Tokenization.
 
 ![tfs-cli](docs/SelectTask.png "Build Task")
 
-2. Type of select the Source Path to search. 
-3. Unput Target Filenames.  This can be a single value or comma-delimited list of names.  Wild Card searces are supported using "*"
+* Type of select the Source Path to search. 
+* Unput Target Filenames.  This can be a single value or comma-delimited list of names.  Wild Card searces are supported using "*"
 
 ```bash
 Web.config
@@ -25,7 +25,7 @@ Web.config
 Settings.xml, *.config
 ```
 
-4. Recursive  - When checked, tokenization task will recursively go through all folders in the Source Path.
+* Recursive  - When checked, tokenization task will recursively go through all folders in the Source Path.
 
 ![tfs-cli](docs/TokenizationValues.png "Tokenization Options")
 
