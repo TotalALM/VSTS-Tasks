@@ -17,7 +17,7 @@ Follow the below steps to upload this task to your account:
 ![tfs-cli](docs/SelectTask.png "Build Task")
 
 * Type of select the Source Path to search. 
-* Unput Target Filenames.  This can be a single value or comma-delimited list of names.  Wild Card searces are supported using "*"
+* Unput Target Filenames.  This can be a single value or comma-delimited list of names.  Wild Card searches are supported using "*"
 
 ```bash
 Web.config
