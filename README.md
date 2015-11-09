@@ -1,11 +1,8 @@
-### How to use **Custom** build / release task
+### How to use **Custom** build / release tasks
 
 Follow the below steps to upload this task to your account:
 
 * Download the tasks repo as [zip file] or clone it using git:
-
-
-
 * Extract the zip file of the desired task
 * Open command prompt and navigate to the folder that contains a json and powershell files.
 
