@@ -1,0 +1,61 @@
+{
+  "id": "2071323c-7902-41df-a2d3-fdce63989c00",
+  "name": "zip",
+  "friendlyName": "Zip",
+  "description": "Compress a folder",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Zip/README.md)",
+  "category": "Utility",
+  "visibility": [
+                "Release"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 9,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+	{
+      "name": "Folder",
+      "type": "filePath",
+      "label": "Folder to Zip",
+      "defaultValue": "",
+	    "helpMarkDown": "The folder that you want to compress into a zip file.",
+      "required": true
+	 },
+    {
+      "name": "Zip",
+      "type": "filePath",
+      "label": "Zip",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Zip File that will be created."
+    }   ,
+      {
+      "name": "RemoveFolderAfterExtraction",
+      "type": "boolean",
+      "label": "Remove Folder After Zip",
+      "defaultValue": "false",
+      "required": false,
+      "helpMarkDown": "Use to remove the folder file after compression."
+    } 
+  ],
+  "instanceNameFormat": "Zip: $Zip",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\zip.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

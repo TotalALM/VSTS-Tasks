@@ -3,7 +3,7 @@
   "name": "Unzip",
   "friendlyName": "UnZip",
   "description": "Extract zip file",
-  "helpMarkDown": "",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/tree/master/VSO%20Tasks/Unzip/README.md)",
   "category": "Utility",
   "visibility": [
                 "Release"
@@ -11,7 +11,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 10,
+    "Minor": 11,
     "Patch": 0
   },
   "demands": [

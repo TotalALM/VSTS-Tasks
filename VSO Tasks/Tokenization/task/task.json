@@ -3,7 +3,7 @@
   "name": "Tokenization",
   "friendlyName": "Tokenization: Transform file",
   "description": "Replaces __<variable>__ with the user-defined variables' values",
-  "helpMarkDown": "",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Tokenization/README.md)",
   "category": "Utility",
   "visibility": [
                 "Release"
@@ -11,7 +11,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 17,
+    "Minor": 18,
     "Patch": 0
   },
   "demands": [
