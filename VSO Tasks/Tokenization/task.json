@@ -1,0 +1,61 @@
+{
+  "id": "4b8ea1ca-9132-4caa-8127-7490130e131f",
+  "name": "Tokenization",
+  "friendlyName": "Tokenization: Transform file",
+  "description": "Replaces __<variable>__ with the user-defined variables' values",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+                "Release"
+                ],  
+  "author": "Microsoft Corporation",
+  "version": {
+    "Major": 1,
+    "Minor": 17,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "SourcePath",
+      "type": "string",
+      "label": "Source Path",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Source path to start looking recursively for the TargetFileName that contains the tokens (__<variable-name>__). These patterns will be replaced with user-defined variables."
+    },
+    {
+      "name": "TargetFileNames",
+      "type": "string",
+      "label": "Target Filenames",
+      "defaultValue": "",
+	    "helpMarkDown": "The target filenames (comma-delimited) that have tokens replaced by user-defined variables. Wild card searching is support.  Example: Web.config or *.config",
+      "required": true
+	 },
+    {
+      "name": "RecursiveSearch",
+      "type": "boolean",
+      "label": "Recursive Search",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Recursively Search through all folders."
+    } 
+  ],
+  "instanceNameFormat": "Tokenization: Transform file $SourcePath",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\tokenization.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
