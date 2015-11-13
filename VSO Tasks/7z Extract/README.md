@@ -1,4 +1,4 @@
-### How to use **7-Zip** build / release tasks
+### How to use **7-Zip Extract** build / release tasks
 
 Follow the below steps to upload this task to your account:
 
@@ -12,14 +12,13 @@ Follow the below steps to upload this task to your account:
 
 ## How to use
 
-* Add a new task and select 7-Zip Archive.
+* Add a new task and select 7-Zip Extract.
 
 ![tfs-cli](docs/SelectTask.png "Build Task")
 
-* Input or Select Folder to archive.
-* Input archive file to archive the folder into. (This can be new or existing.)
-* Select the archive file format; 7z or zip.
-* Remove Folder After Compression - When checked, the folder will be removed after the compression is complete.
+* Input or Select archive file to extract.
+* Input Target Folder to extract the archive file into.
+* Remove Archive After Extraction - When checked, the archive file will be removed after the extraction is complete.
 
 ![tfs-cli](docs/Values.png "Options")
 
