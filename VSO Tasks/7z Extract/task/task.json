@@ -3,7 +3,7 @@
   "name": "7zExtract",
   "friendlyName": "7-Zip Extract",
   "description": "Extract a folder using 7-Zip",
-  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/7z%20Extraction/README.md)",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/7z%20Extract/README.md)",
   "category": "Utility",
   "visibility": [
                 "Build",
@@ -13,7 +13,7 @@
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 0
+    "Patch": 1
   },
   "demands": [
   ],
