@@ -37,4 +37,4 @@ Settings.xml, *.config
 
 ![tfs-cli](docs/ConfigVariables.png "Tokenization Values")
 
-* Simply check the lock if you wish to encrypt the value.  Decryption will happen automatically and requires to extract effort. 
+* Simply check the lock if you wish to encrypt the value.  Decryption will happen automatically and requires no extra effort. 
