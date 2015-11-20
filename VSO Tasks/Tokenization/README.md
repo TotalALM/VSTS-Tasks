@@ -29,3 +29,12 @@ Settings.xml, *.config
 
 ![tfs-cli](docs/TokenizationValues.png "Tokenization Options")
 
+* Add your environment variables
+
+![tfs-cli](docs/SelectEnv.png "Configure Variables")
+
+* If your Web.config has a value '__Environment__' you would only enter the 'Environment' leaving out the '__' at the beginning and end. 
+
+![tfs-cli](docs/TokenizationValues.png "Tokenization Values")
+
+* Simply check the lock if you wish to encrypt the value.  Decryption will happen automatically and requires to extract effort. 
