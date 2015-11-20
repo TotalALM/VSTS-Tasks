@@ -35,6 +35,6 @@ Settings.xml, *.config
 
 * If your Web.config has a value '__Environment__' you would only enter the 'Environment' leaving out the '__' at the beginning and end. 
 
-![tfs-cli](docs/TokenizationValues.png "Tokenization Values")
+![tfs-cli](docs/ConfigVariables.png "Tokenization Values")
 
 * Simply check the lock if you wish to encrypt the value.  Decryption will happen automatically and requires to extract effort. 
