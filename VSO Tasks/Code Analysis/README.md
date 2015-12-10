@@ -18,7 +18,7 @@ Follow the below steps to upload this task to your account:
 
 * Field Definition'select
 
-| **Field** | Information | Required |
+| **Field** | **Information** | **Required** |
 | --- | --- |
 | [Rule Set](https://msdn.microsoft.com/en-us/library/dd264925.aspx) | Built-in rule sets. | Yes |
 | Build Directory | Directory which your (exe's/dll's) reside in.  Example: $(build.sourcesDirectory)\Demo\Example\bin | Yes |
