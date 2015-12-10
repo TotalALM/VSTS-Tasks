@@ -30,7 +30,10 @@ Follow the below steps to upload this task to your account:
 
 ![tfs-cli](docs/Values.png "Values")
 
-* Output
+Output
 
 ![tfs-cli](docs/Output.png "Ouput")
 
+Example Report (HTML)
+
+![tfs-cli](docs/Report.png "Report")
