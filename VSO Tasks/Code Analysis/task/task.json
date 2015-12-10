@@ -1,0 +1,129 @@
+{
+  "id": "cd013152-ec66-4805-8db2-ef7bf4d6e699",
+  "name": "CodeAnalysis",
+  "friendlyName": "Code Analysis",
+  "description": "Perform Code Analysis on your Solution/Projects",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Code%20Analysis/README.md)",
+  "category": "Utility",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 10,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+     {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "ruleset",
+      "type": "pickList",
+      "label": "Rules To Run",
+      "defaultValue": "All Rules",
+      "required": true,
+      "helpMarkDown": "Comma-Delimited List of Rule sets to run.",
+      "options": { 
+         "AllRules": "All Rules", 
+         "BasicCorrectnessRules": "Basic Correctness Rules",
+         "BasicDesignGuidelineRules": "Basic Design Guideline Rules",
+         "ExtendedCorrectnessRules": "Extended Correctness Rules",
+         "ExtendedDesignGuidelineRules": "Extended Design Guideline Rules",
+         "GlobalizationRules": "Globalization Rules",
+         "ManagedMinimumRules": "Managed MinimumRules",
+         "MinimumRecommendedRules": "Minimum Recommended Rules",
+         "MixedMinimumRules": "Mixed Minimum Rules",
+         "MixedRecommendedRules": "Mixed Recommended Rules",
+         "NativeMinimumRules": "Native Minimum Rules",
+         "NativeRecommendedRules": "Native Recommended Rules",
+         "SecurityRules": "Security Rules"
+        }
+    },
+    {
+      "name": "buildDirectory",
+      "type": "string",
+      "label": "Build Directory",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Directory which the [dll's|exe's] reside."
+    },
+     {
+      "name": "fileList",
+      "type": "string",
+      "label": "File's",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Comma-Delimited list of files to run Code Analysis on."
+    },
+    {
+      "name": "outputFile",
+      "type": "string",
+      "label": "Output File",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Output File for the results to be written to."
+    },
+     {
+      "name": "includeSummary",
+      "type": "boolean",
+      "label": "Include Summary",
+      "defaultValue": "true",
+      "required": true,
+      "helpMarkDown": "When checked the output file will include summary information."
+    },
+    {
+      "name": "logging",
+      "type": "boolean",
+      "label": "Verbose",
+      "defaultValue": "false",
+      "required": true,
+      "groupName": "advanced",
+      "helpMarkDown": "When checked the output file will include summary information."
+    },
+    {
+      "name": "ruleSets",
+      "type": "string",
+      "label": "Rule Set Directory",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to specify a custom Rule Set.",
+      "groupName": "advanced"
+    }, 
+    {
+      "name": "xslFileTemplate",
+      "type": "string",
+      "label": "XSL Template",
+      "defaultValue": "",
+	    "helpMarkDown": "Use only if you wish to override the default XSL Template.",
+      "required": false,
+      "groupName": "advanced"
+	 },    
+    {
+      "name": "FxCopEXE",
+      "type": "string",
+      "label": "FxCop Executable Path",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to override the default fxcop executable path.",
+      "groupName": "advanced"
+    }
+  ],
+  "instanceNameFormat": "Code Analysis: $ruleset",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\codeanalysis.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
