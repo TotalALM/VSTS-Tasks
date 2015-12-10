@@ -1,0 +1,78 @@
+{
+  "id": "36b437f9-518b-40ab-9fd4-96d76e04698d",
+  "name": "Email",
+  "friendlyName": "Email",
+  "description": "Send a email.",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Email/README.md)",
+  "category": "Utility",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 19,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "From",
+      "type": "string",
+      "label": "From",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Email address that the email will be From."
+    },
+    {
+      "name": "To",
+      "type": "string",
+      "label": "To",
+      "defaultValue": "",
+	    "helpMarkDown": "To Email Address (comma-delimited) which the email will be sent.",
+      "required": true
+	 },
+    {
+      "name": "Subject",
+      "type": "string",
+      "label": "Subject",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Subject of the email."
+    },
+     {
+      "name": "Body",
+      "type": "multiLine",
+      "label": "Body",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Body of the email."
+    },
+     {
+      "name": "Attachments",
+      "type": "string",
+      "label": "Attachments",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Comma-Delimited file paths that you want to attach to the email."
+    } 
+  ],
+  "instanceNameFormat": "Email: $Subject",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\email.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
