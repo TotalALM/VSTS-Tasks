@@ -36,4 +36,4 @@ Output
 
 Example Report (HTML)
 
-![tfs-cli](docs/report.png "HTML Report")
+![tfs-cli](docs/Report.png "HTML Report")
