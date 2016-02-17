@@ -8,7 +8,7 @@ Follow the below steps to upload this task to your account:
 
 ## Install / Upload Custom Task
 
-*Follow instructions on how to upload the task using - https://github.com/Microsoft/tfs-cli or use the below instructions.
+*Follow instructions on how to upload the task using - https://github.com/Microsoft/tfs-cli/blob/master/docs/buildtasks.md or use the below instructions.
 
 * Install ```tfx-cli``` utility
 ```
@@ -25,6 +25,6 @@ logged in successfully
 You can alternatively use basic auth by passing ```--authType basic``` (read [Configuring Basic Auth](https://github.com/Microsoft/tfs-cli/blob/master/docs/configureBasicAuth.md)).
 * Upload the task to your account:
 ```
-> tfx build tasks upload ./
+> tfx build tasks upload --task-path ./task
 ```
 * Once the task is uploaded, you would be able to view your task under the build or release.

@@ -1,0 +1,102 @@
+{
+  "id": "71a22be3-7a3d-4d80-9730-cbeeab6957a0",
+  "name": "ServiceFabricImageStorePublish",
+  "friendlyName": "Service Fabric: Image Store Publish",
+  "description": "Publish to a Cluster Image Store",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Publish%20to%20Cluster%20Image%20Store/README.md)",
+  "category": "Deploy",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 2
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "clusterUrl",
+      "type": "string",
+      "label": "Cluster URL",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The url required to access the cluster"
+    },
+    {
+      "name": "clusterPort",
+      "type": "string",
+      "label": "Cluster Port",
+      "defaultValue": "",
+	    "helpMarkDown": "The port that is required for cluster access",
+      "required": true
+	 },
+    {
+      "name": "packagePath",
+      "type": "filePath",
+      "label": "Package Path",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The name of the package on disk that is to be uploaded."
+    },
+    {
+      "name": "imageStoreConnectionString",
+      "type": "string",
+      "label": "Image Store Connection String",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The connection string to access the fabric image store."
+    },
+    {
+      "name": "packagePath",
+      "type": "string",
+      "label": "Package Path",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The name of the package on disk that is to be uploaded."
+    },
+     {
+      "name": "appPkgName",
+      "type": "string",
+      "label": "Application Package Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The package name for use with the image store."
+    },
+     {
+      "name": "appTypeName",
+      "type": "string",
+      "label": "Application Type Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The type name which is specially defined and custom for the cluster."
+    },
+     {
+      "name": "appName",
+      "type": "string",
+      "label": "Application Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The name of the app within the fabric for reference"
+    }
+  ],
+  "instanceNameFormat": "Publish: $appName",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\publish.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
