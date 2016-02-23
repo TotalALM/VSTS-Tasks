@@ -1,0 +1,44 @@
+{
+  "id": "d1941ee5-fbbb-4e0f-b04a-f0b2df9b1ce6",
+  "name": "Chocolatey",
+  "friendlyName": "Chocolatey",
+  "description": "Installs the Chocolatey package manager along with a user selected set of packages",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Chocolatey/README.md)",
+  "category": "Deploy",
+  "visibility": [
+                "Release"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 2
+  },
+  "demands": [
+  ],
+   "groups": [
+     {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	"inputs": [
+    {
+      "name": "packages",
+      "type": "string",
+      "label": "Packages",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Comma delimited list of package names to be installed, for example: 7Zip,Fiddler4. A complete list of public packages can be found at https://chocolatey.org/packages"
+    }
+  ],
+  "instanceNameFormat": "Chocolatey Package(s)",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\startChocolatey.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
