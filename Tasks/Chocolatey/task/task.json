@@ -3,16 +3,17 @@
   "name": "Chocolatey",
   "friendlyName": "Chocolatey",
   "description": "Installs the Chocolatey package manager along with a user selected set of packages",
-  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Chocolatey/README.md)",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSTS-Tasks/tree/master/Tasks/Chocolatey)",
   "category": "Deploy",
   "visibility": [
+                "Build",
                 "Release"
                 ],  
   "author": "Total ALM",
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 2
+    "Patch": 5
   },
   "demands": [
   ],
