@@ -7,7 +7,7 @@ param
 )
 
 $patterns = @()
-$regex = ‘__[A-Za-z0-9.]*__'
+$regex = '__[A-Za-z0-9.]*__'
 $matches = @()
 
 Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
@@ -31,7 +31,7 @@ function ProcessMatches($fileMatches)
 		$targetFilePath = $targetFileMatch.Directory.FullName
 		$tempFile = $targetFileMatch.FullName + '.tmp'
 	
-		Write-Host (Get-LocalizedString -Key 'Target File Path: {0}...' -ArgumentList $targetFilePath)
+		#Write-Host (Get-LocalizedString -Key 'Target File Path: {0}...' -ArgumentList $targetFilePath)
 		Write-Host (Get-LocalizedString -Key 'Target File Match: {0}...' -ArgumentList $targetFileMatch.FullName)
 		Write-Host (Get-LocalizedString -Key 'Temp File: {0}...' -ArgumentList $tempFile)
 		
@@ -40,23 +40,21 @@ function ProcessMatches($fileMatches)
 		$matches = select-string -Path $tempFile -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
 		ForEach($match in $matches)
 		{
-		Write-Host (Get-LocalizedString -Key 'Token: {0}...' -ArgumentList $match)
-	
-		$matchedItem = $match
-		$matchedItem = $matchedItem.Trim('_')
-		$matchedItem = $matchedItem -replace '\.','_'
-	
-		Write-Host (Get-LocalizedString -Key 'Token Trimmed: {0}...' -ArgumentList $matchedItem)
-	
-		$matchValue = Get-TaskVariable $distributedTaskContext $matchedItem
-	
-		#Write-Host (Get-LocalizedString -Key 'Token Value: {0}...' -ArgumentList $matchValue)
-	
-		(Get-Content $tempFile) | 
-		Foreach-Object {
-		$_ -replace $match,$matchValue
-		} | 
-		Set-Content $tempFile -Force -Encoding $fileEncoding
+            $matchedItem = $match
+            $matchedItem = $matchedItem.Trim('_')
+            $matchedItem = $matchedItem -replace '\.','_'
+        
+            Write-Host (Get-LocalizedString -Key 'Token {0}...' -ArgumentList $matchedItem) -ForegroundColor Green
+        
+            $matchValue = Get-TaskVariable $distributedTaskContext $matchedItem
+        
+            Write-Host (Get-LocalizedString -Key 'Token Value: {0}...' -ArgumentList $matchValue) -ForegroundColor Green
+        
+            (Get-Content $tempFile) | 
+            Foreach-Object {
+                $_ -replace $match,$matchValue
+            } | 
+            Set-Content $tempFile -Force -Encoding $fileEncoding
 		}
 	
 		Copy-Item -Force $tempFile $targetFileMatch.FullName
