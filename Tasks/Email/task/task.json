@@ -12,7 +12,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 19,
+    "Minor": 20,
     "Patch": 0
   },
   "demands": [
@@ -67,7 +67,7 @@
       "helpMarkDown": "Comma-Delimited file paths that you want to attach to the email."
     } 
   ],
-  "instanceNameFormat": "Email: $Subject",
+  "instanceNameFormat": "Email: $(Subject)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\email.ps1",

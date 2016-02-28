@@ -13,7 +13,7 @@
   "version": {
     "Major": 1,
     "Minor": 4,
-    "Patch": 2
+    "Patch": 3
   },
   "demands": [
   ],
@@ -63,7 +63,7 @@
       "helpMarkDown": "Use to remove the folder file after archival"
     }  
   ],
-  "instanceNameFormat": "7z Archive: $Archive",
+  "instanceNameFormat": "7z Archive: $(Archive)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\7zA.ps1",

@@ -13,7 +13,7 @@
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 5
+    "Patch": 6
   },
   "demands": [
   ],
@@ -34,7 +34,7 @@
       "helpMarkDown": "Comma delimited list of package names to be installed, for example: 7Zip,Fiddler4. A complete list of public packages can be found at https://chocolatey.org/packages"
     }
   ],
-  "instanceNameFormat": "Chocolatey Package(s)",
+  "instanceNameFormat": "Chocolatey Package(s): $(packages)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\startChocolatey.ps1",

@@ -13,7 +13,7 @@
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 2
+    "Patch": 3
   },
   "demands": [
   ],
@@ -91,7 +91,7 @@
       "helpMarkDown": "The name of the app within the fabric for reference"
     }
   ],
-  "instanceNameFormat": "Publish: $appName",
+  "instanceNameFormat": "Publish: $(appName)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\publish.ps1",

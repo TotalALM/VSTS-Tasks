@@ -11,7 +11,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 21,
+    "Minor": 22,
     "Patch": 0
   },
   "demands": [
@@ -50,7 +50,7 @@
       "helpMarkDown": "Recursively Search through all folders."
     } 
   ],
-  "instanceNameFormat": "Tokenization: Transform file $SourcePath",
+  "instanceNameFormat": "Tokenization: Transform file $(TargetFileNames)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\tokenization.ps1",

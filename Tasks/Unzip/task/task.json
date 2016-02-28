@@ -11,7 +11,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 11,
+    "Minor": 12,
     "Patch": 0
   },
   "demands": [
@@ -50,7 +50,7 @@
       "helpMarkDown": "Use to remove the zip file after extraction."
     } 
   ],
-  "instanceNameFormat": "UnZip: $Zip",
+  "instanceNameFormat": "UnZip: $(Zip)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\unzip.ps1",

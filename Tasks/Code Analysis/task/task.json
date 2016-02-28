@@ -12,7 +12,7 @@
   "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 10,
+    "Minor": 11,
     "Patch": 0
   },
   "demands": [
@@ -118,7 +118,7 @@
       "groupName": "advanced"
     }
   ],
-  "instanceNameFormat": "Code Analysis: $ruleset",
+  "instanceNameFormat": "Code Analysis: $(ruleset)",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\codeanalysis.ps1",

@@ -13,9 +13,9 @@ Write-Verbose "archive = $archive" -Verbose
 Write-Verbose "removeFolderAfterExtraction = $removeFolderAfterExtraction" -Verbose 
 Write-Verbose "ArchiveFormat = $archiveformat" -Verbose 
 
-if ($archiveformat -eq "7z" -and -not $archive.toLower().EndsWith('.7z')) { throw "File extension should end with .7z when Arhive Format is [7z]"}
+if ($archiveformat -eq "7z" -and -not $archive.toLower().EndsWith('.7z')) { throw "File extension should end with .7z when Archive Format is [7z]"}
 
-if ($archiveformat -eq "zip" -and -not $archive.toLower().EndsWith('.zip')) { throw "File extension should end with .zip when Arhive Format is [zip]"}
+if ($archiveformat -eq "zip" -and -not $archive.toLower().EndsWith('.zip')) { throw "File extension should end with .zip when Archive Format is [zip]"}
 
 
 function Get7ZipExe()
