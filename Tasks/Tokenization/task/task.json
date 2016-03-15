@@ -10,8 +10,8 @@
                 ],  
   "author": "Total ALM",
   "version": {
-    "Major": 1,
-    "Minor": 22,
+    "Major": 2,
+    "Minor": 0,
     "Patch": 0
   },
   "demands": [
@@ -48,7 +48,23 @@
       "defaultValue": "true",
       "required": false,
       "helpMarkDown": "Recursively Search through all folders."
-    } 
+    },
+    {
+      "name": "TokenStart",
+      "type": "string",
+      "label": "Token Placeholder Start",
+      "defaultValue": "__",
+	  "helpMarkDown": "The token place holder at the front of the variable name. [__]<variable-name>__",
+      "required": true
+	 },
+     {
+      "name": "TokenEnd",
+      "type": "string",
+      "label": "Token Placeholder End",
+      "defaultValue": "__",
+	  "helpMarkDown": "The token place holder at the end of the variable name.  __<variable-name>[__]",
+      "required": true
+	 }
   ],
   "instanceNameFormat": "Tokenization: Transform file $(TargetFileNames)",
   "execution": {

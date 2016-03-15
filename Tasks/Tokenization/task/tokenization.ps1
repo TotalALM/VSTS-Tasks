@@ -3,11 +3,13 @@ param
 (
     [String] [Parameter(Mandatory = $true)] $SourcePath,
 	[String] [Parameter(Mandatory = $true)] $TargetFileNames,
-	[String] [Parameter(Mandatory = $false)] $RecursiveSearch
+	[String] [Parameter(Mandatory = $false)] $RecursiveSearch,
+    [String] [Parameter(Mandatory = $true)] $TokenStart,
+    [String] [Parameter(Mandatory = $true)] $TokenEnd
 )
 
 $patterns = @()
-$regex = '__[A-Za-z0-9.]*__'
+$regex = $TokenStart + '[A-Za-z0-9.]*' + $TokenEnd
 $matches = @()
 
 Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
@@ -41,7 +43,8 @@ function ProcessMatches($fileMatches)
 		ForEach($match in $matches)
 		{
             $matchedItem = $match
-            $matchedItem = $matchedItem.Trim('_')
+            $matchedItem = $matchedItem.TrimStart($TokenStart)
+            $matchedItem = $matchedItem.TrimEnd($TokenEnd)
             $matchedItem = $matchedItem -replace '\.','_'
         
             Write-Host (Get-LocalizedString -Key 'Token {0}...' -ArgumentList $matchedItem) -ForegroundColor Green

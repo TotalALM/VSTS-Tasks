@@ -1,5 +1,11 @@
 ### How to use **Tokenization** build / release tasks
 
+Install from the Marketplace 
+
+Marketplace - https://marketplace.visualstudio.com/items?itemName=TotalALM.totalalm-tokenization
+
+OR
+
 Follow the below steps to upload this task to your account:
 
 * Download the tasks repo as [zip file] or clone it using git:
@@ -16,16 +22,15 @@ Follow the below steps to upload this task to your account:
 
 ![tfs-cli](docs/SelectTask.png "Build Task")
 
-* Type of select the Source Path to search. 
-* Input Target Filenames.  This can be a single value or comma-delimited list of names.  Wild Card searches are supported using "*"
+## Variables
 
-```bash
-Web.config
-*.config
-Settings.xml, *.config
-```
-
-* Recursive  - When checked, tokenization task will recursively go through all folders in the Source Path.
+| **Field** | **Information** | **Required** |
+| --- | --- | --- |
+| Source Path | "Source path to start looking recursively for the TargetFileName that contains the tokens (<prefix><variablename><suffix>). These patterns will be replaced with user-defined variables. | Yes |
+| Target Filenames | The target filenames (comma-delimited) that have tokens replaced by user-defined variables. Wild card searching is support.  Example: Web.config or *.config or Settings.xml, *.config | Yes |
+| Recursive Search | Recursively Search through all folders in the Source Path  | Yes |
+| Token Placeholder Start | The token place holder at the front of the variable name. [__]<variable-name>__ | Yes |
+| Token Placeholder End | The token place holder at the end of the variable name.  __<variable-name>[__] | Yes |
 
 ![tfs-cli](docs/TokenizationValues.png "Tokenization Options")
 
