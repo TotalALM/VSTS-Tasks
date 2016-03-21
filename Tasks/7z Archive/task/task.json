@@ -13,7 +13,7 @@
   "version": {
     "Major": 1,
     "Minor": 4,
-    "Patch": 3
+    "Patch": 4
   },
   "demands": [
   ],
@@ -49,8 +49,8 @@
        "defaultValue": "", 
        "required": true, 
        "options": { 
-         "AzureBlob": "7z", 
-         "AzureVMs": "zip" 
+         "7z": "7z", 
+         "zip": "zip" 
         }, 
        "helpMarkDown": "Select the archive format." 
      } ,
