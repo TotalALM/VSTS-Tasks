@@ -29,7 +29,7 @@
         {
       "name": "Archive",
       "type": "filePath",
-      "label": "Extract",
+      "label": "Archive to Extract",
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "Archive that you wish to extract."

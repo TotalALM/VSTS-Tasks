@@ -1,8 +1,14 @@
 ### How to use **7-Zip** build / release tasks
 
+Install from the Marketplace 
+
+Marketplace - https://marketplace.visualstudio.com/items?itemName=TotalALM.totalalm-7zip
+
+OR
+
 Follow the below steps to upload this task to your account:
 
-* Download the tasks repo as [zip file] or clone it using git:
+* Download the tasks repo as [zip file] or clone it using git: 
 * Extract the zip file of the desired task
 * Open command prompt and navigate to the folder that contains a json and powershell files.
 
