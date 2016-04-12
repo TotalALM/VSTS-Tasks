@@ -1,0 +1,74 @@
+{
+  "id": "650f1ab8-d1d0-4508-8e05-7527d345a46e",
+  "name": "7z",
+  "friendlyName": "7-Zip Archive",
+  "description": "Compress a folder using 7-Zip",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/7z%20Archive/README.md)",
+  "category": "Utility",
+  "visibility": [
+                "Build",
+                "Release"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 4,
+    "Patch": 4
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+	{
+      "name": "Folder",
+      "type": "filePath",
+      "label": "Folder to Archive",
+      "defaultValue": "",
+	    "helpMarkDown": "The folder that you want to compress into a archive file.",
+      "required": true
+	 },
+    {
+      "name": "Archive",
+      "type": "filePath",
+      "label": "Archive",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Archive File that will be created."
+    }   ,
+    { 
+       "name": "ArchiveFormat", 
+       "type": "pickList", 
+       "label": "Archive Format", 
+       "defaultValue": "", 
+       "required": true, 
+       "options": { 
+         "7z": "7z", 
+         "zip": "zip" 
+        }, 
+       "helpMarkDown": "Select the archive format." 
+     } ,
+      {
+      "name": "RemoveFolderAfterExtraction",
+      "type": "boolean",
+      "label": "Remove Folder After Archive",
+      "defaultValue": "false",
+      "required": false,
+      "helpMarkDown": "Use to remove the folder file after archival"
+    }  
+  ],
+  "instanceNameFormat": "7z Archive: $(Archive)",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\7zA.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
