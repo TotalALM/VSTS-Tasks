@@ -3,7 +3,7 @@
   "name": "7z",
   "friendlyName": "7-Zip Archive",
   "description": "Compress a folder using 7-Zip",
-  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/7z%20Archive/README.md)",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSTS-Tasks/blob/master/Tasks/7z%20Archive/README.md)",
   "category": "Utility",
   "visibility": [
                 "Build",
