@@ -1,0 +1,62 @@
+{
+  "id": "b876037c-d990-4718-baca-65a8df0dd9dd",
+  "name": "DeltaFileCopy",
+  "friendlyName": "Delta File Copy",
+  "description": "Copy Folders and Files Recursively that only contain changes.",
+  "helpMarkDown": "[More Information]()",
+  "category": "Utility",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 23
+  },
+  "demands": [
+  ],
+   "groups": [
+     {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "FromDirectory",
+      "type": "string",
+      "label": "Source",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Source directory to copy files from."
+    },
+     {
+      "name": "ToDirectory",
+      "type": "string",
+      "label": "Target",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Target directory to copy files into."
+    },
+    {
+      "name": "ExcludedFileNamesCommaDelimited",
+      "type": "string",
+      "label": "Excluded Files",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Comma-Delimited list of files to ignore."
+    }
+  ],
+  "instanceNameFormat": "Delta Copy: $(FromDirectory)",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\deltacopy.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
