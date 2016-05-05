@@ -3,7 +3,7 @@
   "name": "DeltaFileCopy",
   "friendlyName": "Delta File Copy",
   "description": "Copy Folders and Files Recursively that only contain changes.",
-  "helpMarkDown": "[More Information]()",
+  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSTS-Tasks/tree/master/Tasks/Delta%20File%20Copy)",
   "category": "Utility",
   "visibility": [
                 "Release",

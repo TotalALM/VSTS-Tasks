@@ -4,7 +4,7 @@ Delta File Copy will recursively copy a directory from one location to another. 
 
 * Add a new task and select Delta File Copy.
 
-![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Code%20Analysis/docs/SelectTask.png "Task")
+![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Delta%20File%20Copy/docs/SelectTask.png "Task")
 
 | **Field** | **Information** | **Required** |
 | --- | --- | --- |
@@ -12,9 +12,9 @@ Delta File Copy will recursively copy a directory from one location to another. 
 | Target | Target directory to copy files into. | Yes |
 | Excluded Files | Comma-Delimited list of files to ignore. Example: Example.dll,Example.Data.dll  | No |
 
-![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Code%20Analysis/docs/Values.png "Values")
+![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Delta%20File%20Copy/docs/Values.png "Values")
 
 Output
 
-![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Code%20Analysis/docs/Output.png "Ouput")
+![tfs-cli](https://raw.githubusercontent.com/TotalALM/VSTS-Tasks/master/Tasks/Delta%20File%20Copy/docs/Output.png "Ouput")
 
