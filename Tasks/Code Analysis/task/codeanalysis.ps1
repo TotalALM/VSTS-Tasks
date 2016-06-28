@@ -56,7 +56,7 @@ if (Test-Path $FxCopInstallationPath)
             $parameters += "/ruleSet:+$FxCopInstallationPath\Rule Sets\$addDefaultRuleSets";
         }
 
-        if($removeDefaultRuleSets)
+        if(![string]::IsNullOrWhiteSpace($removeDefaultRuleSets))
         {
             Write-Host $removeDefaultRuleSets`.ruleset
             $parameters += "/ruleSet:-$FxCopInstallationPath\Rule Sets\$removeDefaultRuleSets.ruleset";
