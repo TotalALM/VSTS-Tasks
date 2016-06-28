@@ -71,9 +71,10 @@
       "required": false,
       "helpMarkDown": "Use only if you wish to remove Rule Sets.",
       "options": {
+	    "": "",
         "AllRules": "AllRules.ruleset",
         "BasicCorrectnessRules": "BasicCorrectnessRules.ruleset",
-        "BasicDesignGuidelineRules": "BasicDesignGuidelineRules",
+        "BasicDesignGuidelineRules": "BasicDesignGuidelineRules.ruleset",
         "ExtendedCorrectnessRules": "ExtendedCorrectnessRules.ruleset",
         "ExtendedDesignGuidelineRules": "ExtendedDesignGuidelineRules.ruleset",
         "GlobalizationRules": "GlobalizationRules.ruleset",
