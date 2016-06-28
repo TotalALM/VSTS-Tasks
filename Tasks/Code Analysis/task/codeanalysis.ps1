@@ -1,122 +1,160 @@
-﻿[CmdletBinding(DefaultParameterSetName = 'None')]
-param
+﻿param
 (
-	[String] [Parameter(Mandatory = $true)] $ruleSet,
-	[String] [Parameter(Mandatory = $true)] $buildDirectory,#directory of the bin folder
-    [String] [Parameter(Mandatory = $true)] $fileList,
-	[String] [Parameter(Mandatory = $true)] $outputFile,#The output file
-    [String] [Parameter(Mandatory = $true)] $includeSummary,#whether or not to include summary to output
-	[String] [Parameter(Mandatory = $true)] $logging,
-	[String] [Parameter(Mandatory = $false)] $ruleSets,#identifies location of custom rulesets
-	[String] [Parameter(Mandatory = $false)] $xslFileTemplate, #any xsl template for resulting report
-	[String] [Parameter(Mandatory = $false)] $FxCopEXE
-
+	[Parameter(Mandatory = $true)] [string] $inputFiles,
+	[Parameter(Mandatory = $true)] [string] $output,
+    [Parameter(Mandatory = $false)] [string] $addDefaultRuleSets,
+	[Parameter(Mandatory = $false)] [string] $removeDefaultRuleSets,
+    [Parameter(Mandatory = $false)] [string] $applyoutXsl,
+	[Parameter(Mandatory = $false)] [string] $summary,
+    [Parameter(Mandatory = $false)] [string] $logging,
+    [Parameter(Mandatory = $false)] [string] $console,
+	[Parameter(Mandatory = $false)] [string] $types,
+	[Parameter(Mandatory = $false)] [string] $addCustomRuleLibraries,
+	[Parameter(Mandatory = $false)][ string] $addCustomRuleSets,
+    [Parameter(Mandatory = $false)][ string] $removeCustomRuleSets,
+    [Parameter(Mandatory = $false)][ string] $consoleXsl
 )
- 
-Write-Host "Starting Code Analysis"
 
-[bool]$includeSummary = Convert-String $includeSummary Boolean
+$parameters =  @()
+
+[bool]$summary = Convert-String $summary Boolean
 [bool]$logging = Convert-String $logging Boolean
+[bool]$console = Convert-String $console Boolean
 
-$allArgs =  @()
+$FxCopInstallationPath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools"
+Write-Host $FxCopInstallationPath
 
-function resolveFxCop()
+if (Test-Path $FxCopInstallationPath)
 {
-	 if ([string]::IsNullOrEmpty($FxCopEXE))
-		{	
-			$v14 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\FxCopCmd.exe"	
-			$v12 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\FxCopCmd.exe"
+	$FxCopCmdPath = "$FxCopInstallationPath\FxCop\FxCopCmd.exe"
+    Write-Host $FxCopCmdPath
 
-			if (test-path $v14){$FxCopEXE = $v14}
-			elseif (test-path $v12){$FxCopEXE = $v12}									
-		}
-	
-	if ((test-path $FxCopEXE)) { return $FxCopEXE}  
-
-	throw "Fx Cop not installed"
-}
-
-function resolveRuleSets()
-{
-	 if ([string]::IsNullOrEmpty($ruleSets))
-		{	
-			$v14 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets"	
-			$v12 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\Rule Sets"
-
-			if (test-path $v14){$ruleSets = $v14}
-			elseif (test-path $v12){$ruleSets = $v12}									
-		}
-	
-	if ((test-path $ruleSets)) { return $ruleSets}  
-}
-
-function resolveXSLFileTemplate()
-{
-	 if ([string]::IsNullOrEmpty($xslFileTemplate))
-		{	
-			$v14 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\xml\FxCopReport.xsl"	
-			$v12 = "$env:ProgramFiles (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\xml\FxCopReport.xsl"
-
-			if (test-path $v14){$xslFileTemplate = $v14}
-			elseif (test-path $v12){$xslFileTemplate = $v12}									
-		}
-	
-	if ((test-path $xslFileTemplate)) { return $xslFileTemplate}  
-}
-
-function CheckFileDirectory($path)
-{
-	if ((Test-Path $path)) { return $true }
-
-	return $false
-}
-
-$FxCopEXE = resolveFxCop
-$ruleSets = resolveRuleSets
-$xslFileTemplate = resolveXSLFileTemplate
-
-
-#Compile files to run analysis
-$fileList.Split(",") | foreach {
-    Write-Host "Include file: $buildDirectory.Trim()\$_.Trim()"
-
-	$chkdll = CheckFileDirectory -path $buildDirectory.Trim()\$_.Trim()
-
-	if ($chkdll)
+	if (Test-Path $FxCopCmdPath)
 	{
-		$dll = "/file:$buildDirectory.Trim()\$_.Trim() "
-		$allArgs += $dll 
+		foreach ($inputFile in $inputFiles)
+		{
+            if (Test-Path $inputFile)
+			{
+                Write-Host $inputFile
+                $parameters += "/file:$inputFile"
+            }
+            else
+            {
+                Write-Host $inputFile does not exist
+            }
+		}
+
+        if ($output)
+		{
+            Write-Host $output
+			$parameters += "/out:$output";
+		}
+
+        if($addDefaultRuleSets)
+        {
+            Write-Host $addDefaultRuleSets
+            $parameters += "/ruleSet:+$FxCopInstallationPath\Rule Sets\$addDefaultRuleSets";
+        }
+
+        if($removeDefaultRuleSets)
+        {
+            Write-Host $removeDefaultRuleSets`.ruleset
+            $parameters += "/ruleSet:-$FxCopInstallationPath\Rule Sets\$removeDefaultRuleSets.ruleset";
+        }
+
+		if ($applyoutXsl)
+		{
+            Write-Host $applyoutXsl
+			$parameters += "/applyoutXsl:$FxCopInstallationPath\FxCop\Xml\$applyoutXsl"
+		}
+
+        if ($summary)
+		{
+            Write-Host $summary
+			$parameters += "/summary";
+		}
+
+        if ($logging)
+		{
+            Write-Host $logging
+			$parameters += "/verbose";
+		}
+
+        if ($console)
+		{
+            Write-Host $console
+			$parameters += "/console";
+		}
+
+        if ($types)
+		{
+            Write-Host $types
+			$parameters += "/types:$types";
+		}
+
+        if ($addCustomRuleLibraries)
+        {
+            foreach ($addCustomRuleLibrary in $addCustomRuleLibraries)
+		    {
+                if (Test-Path $addCustomRuleLibrary)
+			    {
+                    Write-Host $addCustomRuleLibrary
+				    $parameters += "/rule:$addCustomRuleLibrary";
+			    }
+                else
+                {
+                    Write-Host $addCustomRuleLibrary does not exist
+                }
+            }
+        }
+
+        if ($addCustomRuleSets)
+        {
+            foreach ($customRuleSet in $addCustomRuleSets)
+		    {
+                if (Test-Path $customRuleSet)
+			    {
+                    Write-Host $customRuleSet
+				    $parameters += "/ruleSet:+$customRuleSet"
+			    }
+                else
+                {
+                    Write-Host $customRuleSet does not exist
+                }
+            }
+        }
+
+        if ($removeCustomRuleSets)
+        {
+            foreach ($customRuleSet in $removeCustomRuleSets)
+		    {
+                if (Test-Path $customRuleSet)
+			    {
+                    Write-Host $customRuleSet
+				    $parameters += "/ruleSet:-$customRuleSet"
+			    }
+                else
+                {
+                    Write-Host $customRuleSet does not exist
+                }
+            }
+        }
+
+        if ($consoleXsl)
+		{
+            Write-Host $consoleXsl
+			$parameters += "/consoleXsl:$FxCopInstallationPath\FxCop\Xml\$consoleXsl"
+		}
+
+        $parameters
+        & $FxCopCmdPath $parameters
 	}
+    else
+    {
+        Write-Host $FxCopCmdPath does not exist
+    }
 }
-
-
-$allArgs += "/ruleset:+$ruleSets\$ruleSet.ruleset"
-
-
-#denotes to include summary
-if ($includeSummary)
+else
 {
-    $allArgs += "/Summary" 
+    Write-Host $FxCopInstallationPath does not exist
 }
-
-#sets output file path
-$allArgs += "/out:$outputFile"
-
-
-if ($logging)
-{
-    $allArgs += "/verbose"
-}
-
-$checkXsl = CheckFileDirectory -path $xslFileTemplate
-if ($checkXsl)
-{
-    $allArgs += "/outXsl:$xslFileTemplate"
-    $allArgs += "/applyoutXsl"
-}
-
-Write-Host $allArgs
-
-& $FxCopEXE $allArgs
-
-
