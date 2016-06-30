@@ -1,127 +1,185 @@
 {
   "id": "cd013152-ec66-4805-8db2-ef7bf4d6e699",
-  "name": "CodeAnalysis",
-  "friendlyName": "Code Analysis",
-  "description": "Perform Code Analysis on your Solution/Projects",
-  "helpMarkDown": "[More Information](https://github.com/TotalALM/VSO-Tasks/blob/master/VSO%20Tasks/Code%20Analysis/README.md)",
+  "name": "FxCopStaticCodeAnalysis",
+  "friendlyName": "FxCop Static Code Analysis",
+  "description": "Performs FxCop Static Code Analysis on exes & dlls",
+  "helpMarkDown": "Contribute to code<br>[More Information](https://github.com/TotalALM/VSTS-Tasks/)",
   "category": "Utility",
   "visibility": [
-                "Release",
-                "Build"
-                ],  
-  "author": "Total ALM",
+    "Release",
+    "Build"
+  ],
   "version": {
     "Major": 1,
-    "Minor": 11,
+    "Minor": 0,
     "Patch": 0
   },
-  "demands": [
-  ],
-   "groups": [
-     {
+  "groups": [
+    {
       "name": "advanced",
       "displayName": "Advanced",
-      "isExpanded": false
+      "isExpanded": true
     }
-    ],
-	
-	"inputs": [
+  ],
+  "inputs": [
     {
-      "name": "ruleset",
-      "type": "pickList",
-      "label": "Rules To Run",
-      "defaultValue": "All Rules",
-      "required": true,
-      "helpMarkDown": "Comma-Delimited List of Rule sets to run.",
-      "options": { 
-         "AllRules": "All Rules", 
-         "BasicCorrectnessRules": "Basic Correctness Rules",
-         "BasicDesignGuidelineRules": "Basic Design Guideline Rules",
-         "ExtendedCorrectnessRules": "Extended Correctness Rules",
-         "ExtendedDesignGuidelineRules": "Extended Design Guideline Rules",
-         "GlobalizationRules": "Globalization Rules",
-         "ManagedMinimumRules": "Managed MinimumRules",
-         "MinimumRecommendedRules": "Minimum Recommended Rules",
-         "MixedMinimumRules": "Mixed Minimum Rules",
-         "MixedRecommendedRules": "Mixed Recommended Rules",
-         "NativeMinimumRules": "Native Minimum Rules",
-         "NativeRecommendedRules": "Native Recommended Rules",
-         "SecurityRules": "Security Rules"
-        }
-    },
-    {
-      "name": "buildDirectory",
-      "type": "string",
-      "label": "Build Directory",
+      "name": "inputFiles",
+      "type": "filePath",
+      "label": "Input Files",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "Directory which the [dll's|exe's] reside."
-    },
-     {
-      "name": "fileList",
-      "type": "string",
-      "label": "File's",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "Comma-Delimited list of files to run Code Analysis on."
+      "helpMarkDown": "Specifies the target assembly to analyze. If you specify a directory, FxCopCmd tries to analyze all files that have the .exe or .dll extension."
     },
     {
-      "name": "outputFile",
-      "type": "string",
+      "name": "output",
+      "type": "filePath",
       "label": "Output File",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "Output File for the results to be written to."
+      "helpMarkDown": "Specifies the file name for the analysis report. If the file exists, it is overwritten without warning. If no items are reported by the analysis and the file does not exist, it is not created. If the file exists, it is deleted. By default, the file includes an xml-style sheet processing instruction that references FxCopReport.xsl. The file is saved in XML format unless /applyoutXsl is specified."
     },
-     {
-      "name": "includeSummary",
+    {
+      "name": "addDefaultRuleSets",
+      "type": "pickList",
+      "label": "Add Default Rule Sets",
+      "defaultValue": "AllRules.ruleset",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to add Rule Sets.",
+      "options": {
+        "AllRules": "AllRules.ruleset",
+        "BasicCorrectnessRules": "BasicCorrectnessRules.ruleset",
+        "BasicDesignGuidelineRules": "BasicDesignGuidelineRules.ruleset",
+        "ExtendedCorrectnessRules": "ExtendedCorrectnessRules.ruleset",
+        "ExtendedDesignGuidelineRules": "ExtendedDesignGuidelineRules.ruleset",
+        "GlobalizationRules": "GlobalizationRules.ruleset",
+        "ManagedMinimumRules": "ManagedMinimumRules.ruleset",
+        "MinimumRecommendedRules": "MinimumRecommendedRules.ruleset",
+        "MixedMinimumRules": "MixedMinimumRules.ruleset",
+        "MixedRecommendedRules": "MixedRecommendedRules.ruleset",
+        "NativeMinimumRules": "NativeMinimumRules.ruleset",
+        "NativeRecommendedRules": "NativeRecommendedRules.ruleset",
+        "SecurityRules": "SecurityRules.ruleset"
+      }
+    },
+    {
+      "name": "removeDefaultRuleSets",
+      "type": "pickList",
+      "label": "Remove Default Rule Sets",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to remove Rule Sets.",
+      "options": {
+        "": "",
+        "AllRules": "AllRules.ruleset",
+        "BasicCorrectnessRules": "BasicCorrectnessRules.ruleset",
+        "BasicDesignGuidelineRules": "BasicDesignGuidelineRules.ruleset",
+        "ExtendedCorrectnessRules": "ExtendedCorrectnessRules.ruleset",
+        "ExtendedDesignGuidelineRules": "ExtendedDesignGuidelineRules.ruleset",
+        "GlobalizationRules": "GlobalizationRules.ruleset",
+        "ManagedMinimumRules": "ManagedMinimumRules.ruleset",
+        "MinimumRecommendedRules": "MinimumRecommendedRules.ruleset",
+        "MixedMinimumRules": "MixedMinimumRules.ruleset",
+        "MixedRecommendedRules": "MixedRecommendedRules.ruleset",
+        "NativeMinimumRules": "NativeMinimumRules.ruleset",
+        "NativeRecommendedRules": "NativeRecommendedRules.ruleset",
+        "SecurityRules": "SecurityRules.ruleset"
+      }
+    },
+    {
+      "name": "applyoutXsl",
+      "type": "pickList",
+      "label": "XSL transformation in Report",
+      "defaultValue": "CodeAnalysisReport.xsl",
+      "required": false,
+      "helpMarkDown": "Applies the XSL transformation that is specified in /out: to the analysis report before saving the file.",
+      "options": {
+        "CodeAnalysisReport": "CodeAnalysisReport.xsl",
+        "FxCopReport": "FxCopReport.xsl",
+        "VSConsoleOutput": "VSConsoleOutput.xsl"
+      }
+    },
+    {
+      "name": "summary",
       "type": "boolean",
-      "label": "Include Summary",
+      "label": "Summary",
       "defaultValue": "true",
-      "required": true,
-      "helpMarkDown": "When checked the output file will include summary information."
+      "required": false,
+      "groupName": "advanced",
+      "helpMarkDown": "Includes a summary report that has the informational messages returned by FxCopCmd. The summary shows the number of items found, how many items were new, and the running time for the analysis."
     },
     {
       "name": "logging",
       "type": "boolean",
       "label": "Verbose",
-      "defaultValue": "false",
-      "required": true,
+      "defaultValue": "true",
+      "required": false,
       "groupName": "advanced",
-      "helpMarkDown": "When checked the output file will include summary information."
+      "helpMarkDown": "Outputs verbose information during analysis."
     },
     {
-      "name": "ruleSets",
-      "type": "string",
-      "label": "Rule Set Directory",
-      "defaultValue": "",
+      "name": "console",
+      "type": "boolean",
+      "label": "Console",
+      "defaultValue": "true",
       "required": false,
-      "helpMarkDown": "Use only if you wish to specify a custom Rule Set.",
-      "groupName": "advanced"
-    }, 
+      "groupName": "advanced",
+      "helpMarkDown": "Directs analysis output to the console or to the Output window in Visual Studio .NET. By default, the XSL file FxCopConsoleOutput.xsl is applied to the output before it is displayed."
+    },
     {
-      "name": "xslFileTemplate",
+      "name": "types",
       "type": "string",
-      "label": "XSL Template",
+      "label": "Types",
       "defaultValue": "",
-	    "helpMarkDown": "Use only if you wish to override the default XSL Template.",
       "required": false,
+      "helpMarkDown": "Specifies the types to analyze. This option disables analysis of assemblies, namespaces, and resources; only the specified types and their members are included in the analysis. The elements of <type list> can use the wildcard character '*' at the end of the name to select multiple types.",
       "groupName": "advanced"
-	 },    
+    },
     {
-      "name": "FxCopEXE",
+      "name": "addCustomRuleLibraries",
       "type": "string",
-      "label": "FxCop Executable Path",
+      "label": "Add Custom Rule Libraries",
       "defaultValue": "",
       "required": false,
-      "helpMarkDown": "Use only if you wish to override the default fxcop executable path.",
+      "helpMarkDown": "Specifies the location of rule libraries to load. If you specify a directory, FxCopCmd tries to load all files that have the .dll extension.",
+      "groupName": "advanced"
+    },
+    {
+      "name": "addCustomRuleSets",
+      "type": "string",
+      "label": "Add Custom Rule Sets",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to add custom Rule Sets.",
+      "groupName": "advanced"
+    },
+    {
+      "name": "removeCustomRuleSets",
+      "type": "string",
+      "label": "Remove Custom Rule Sets",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use only if you wish to remove Rule Sets.",
+      "groupName": "advanced"
+    },
+    {
+      "name": "consoleXsl",
+      "type": "pickList",
+      "label": "XSL transformation in Console",
+      "defaultValue": "VSConsoleOutput.xsl",
+      "required": false,
+      "helpMarkDown": "Specifies the XSL or XSLT file that contains a transformation to be applied to the analysis output before it is displayed in the console or the Output window of Visual Studio.",
+      "options": {
+        "CodeAnalysisReport": "CodeAnalysisReport.xsl",
+        "FxCopReport": "FxCopReport.xsl",
+        "VSConsoleOutput": "VSConsoleOutput.xsl"
+      },
       "groupName": "advanced"
     }
   ],
-  "instanceNameFormat": "Code Analysis: $(ruleset)",
+  "instanceNameFormat": "FxCopStaticCodeAnalysis",
   "execution": {
     "Powershell": {
-      "target": "$(currentDirectory)\\codeanalysis.ps1",
+      "target": "$(currentDirectory)\\CodeAnalysis.ps1",
       "argumentFormat": "",
       "workingDirectory": "$(currentDirectory)"
     }
