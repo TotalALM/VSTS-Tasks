@@ -1,21 +1,19 @@
 {
   "id": "cd013152-ec66-4805-8db2-ef7bf4d6e699",
-  "name": "CodeAnalysis",
-  "friendlyName": "Code Analysis",
-  "description": "Perform Code Analysis on your Solution/Projects",
+  "name": "FxCopStaticCodeAnalysis",
+  "friendlyName": "FxCop Static Code Analysis",
+  "description": "Performs FxCop Static Code Analysis on exes & dlls",
   "helpMarkDown": "Contribute to code<br>[More Information](https://github.com/TotalALM/VSTS-Tasks/)",
   "category": "Utility",
   "visibility": [
     "Release",
     "Build"
   ],
-  "author": "Total ALM",
   "version": {
     "Major": 1,
-    "Minor": 11,
+    "Minor": 0,
     "Patch": 0
   },
-  "demands": [],
   "groups": [
     {
       "name": "advanced",
@@ -71,7 +69,7 @@
       "required": false,
       "helpMarkDown": "Use only if you wish to remove Rule Sets.",
       "options": {
-	    "": "",
+        "": "",
         "AllRules": "AllRules.ruleset",
         "BasicCorrectnessRules": "BasicCorrectnessRules.ruleset",
         "BasicDesignGuidelineRules": "BasicDesignGuidelineRules.ruleset",
@@ -178,7 +176,7 @@
       "groupName": "advanced"
     }
   ],
-  "instanceNameFormat": "Code Analysis",
+  "instanceNameFormat": "FxCopStaticCodeAnalysis",
   "execution": {
     "Powershell": {
       "target": "$(currentDirectory)\\CodeAnalysis.ps1",
