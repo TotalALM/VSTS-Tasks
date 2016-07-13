@@ -80,7 +80,7 @@ $xslFileTemplate = resolveXSLFileTemplate
 $fileList.Split(",") | foreach {
     Write-Host "Include file: $buildDirectory.Trim()\$_.Trim()"
 
-	$chkdll = CheckFileDirectory -path $buildDirectory.Trim()\$_.Trim()
+	 $chkdll = CheckFileDirectory -path $buildDirectory.Trim()  
 
 	if ($chkdll)
 	{
