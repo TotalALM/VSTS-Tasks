@@ -78,15 +78,24 @@ $xslFileTemplate = resolveXSLFileTemplate
 
 #Compile files to run analysis
 $fileList.Split(",") | foreach {
-    Write-Host "Include file: $buildDirectory.Trim()\$_.Trim()"
+    $files = @($_)
+
+    $IsWP = [System.Management.Automation.WildcardPattern]::ContainsWildcardCharacters($files)
+    if($IsWP) { 
+        $files = Get-ChildItem -path $buildDirectory $files | % { $_.Name }
+    }
+
+    $files | foreach {
+        Write-Host "Include file: $buildDirectory.Trim()\$_.Trim()"
 
 	 $chkdll = CheckFileDirectory -path $buildDirectory.Trim()  
 
 	if ($chkdll)
 	{
-		$dll = "/file:$buildDirectory.Trim()\$_.Trim() "
-		$allArgs += $dll 
+	    $dll = "/file:$buildDirectory.Trim()\$_.Trim() "
+	    $allArgs += $dll 
 	}
+    }
 }
 
 
