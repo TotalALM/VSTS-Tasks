@@ -68,7 +68,7 @@
       "label": "7z additional arguments",
       "defaultValue": "",
       "required": false,
-      "helpMarkDown": "Additional arguments besides a -r (.7z) or a -tzip -r (.zip) passed to 7z.exe program"
+	  "helpMarkDown": "Additional arguments besides 'a -r' (.7z) or 'a -tzip -r' (.zip) passed to 7z.exe program",
       "groupName": "advanced"
     }  
   ],
