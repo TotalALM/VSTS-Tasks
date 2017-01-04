@@ -3,7 +3,8 @@
     [String] [Parameter(Mandatory = $true)] $folder,
 	[String] [Parameter(Mandatory = $true)] $archive,
     [String] [Parameter(Mandatory = $true)] $archiveformat,
-    [String] $removeFolderAfterExtraction
+    [String] $removeFolderAfterExtraction,
+    [String] $additionalArguments
 )
 
 Write-Verbose "Entering script Extract.ps1"  -Verbose
@@ -41,9 +42,9 @@ function CreateZip($folderPath, $archivePath)
 
     foreach ($item in $items) 
     {
-        if ($archiveformat -eq "7z") { sz a -r $archivePath $item.FullName}
+        if ($archiveformat -eq "7z") { sz a -r $additionalArguments $archivePath $item.FullName}
 
-        if ($archiveformat -eq "zip") { sz a -tzip -r $archivePath $item.FullName}
+        if ($archiveformat -eq "zip") { sz a -tzip -r $additionalArguments $archivePath $item.FullName}
     }
      
   
