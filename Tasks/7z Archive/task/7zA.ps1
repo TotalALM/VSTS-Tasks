@@ -3,7 +3,8 @@
     [String] [Parameter(Mandatory = $true)] $folder,
 	[String] [Parameter(Mandatory = $true)] $archive,
     [String] [Parameter(Mandatory = $true)] $archiveformat,
-    [String] $removeFolderAfterExtraction
+    [String] $removeFolderAfterExtraction,
+    [String] $additionalArguments
 )
 
 Write-Verbose "Entering script Extract.ps1"  -Verbose
@@ -35,18 +36,17 @@ function Get7ZipExe()
 }
 
 function CreateZip($folderPath, $archivePath)
-{ 
-
-    $items = Get-ChildItem -Path $folderPath
-
-    foreach ($item in $items) 
-    {
-        if ($archiveformat -eq "7z") { sz a -r $archivePath $item.FullName}
-
-        if ($archiveformat -eq "zip") { sz a -tzip -r $archivePath $item.FullName}
+{
+    $Tokens =  [management.automation.psparser]::Tokenize($additionalArguments,[ref]$null) | ForEach-Object { $_.Content }
+ 
+    if ($archiveformat -eq "7z") { 
+        Write-Verbose "Arguments = a -r $Tokens $archivePath $folderPath" -Verbose
+        sz a -r $Tokens $archivePath $folderPath
     }
-     
-  
+    elseif ($archiveformat -eq "zip") { 
+        Write-Verbose "Arguments = a -tzip -r $Tokens $archivePath $folderPath" -Verbose
+        sz a -tzip -r $Tokens $archivePath $folderPath
+    }
 }
 
 function RemoveFolder($folder)
