@@ -42,6 +42,14 @@
       "required": true,
       "helpMarkDown": "Target directory to copy files into."
     },
+     {
+      "name": "SyncAfterCopy",
+      "type": "boolean",
+      "label": "Sync after copy?",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Delete files from target directory if they don't exist in the source directory."
+    },
     {
       "name": "ExcludedFileNamesCommaDelimited",
       "type": "string",
