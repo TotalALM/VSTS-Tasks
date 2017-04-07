@@ -1,0 +1,70 @@
+{
+  "id": "20D7B3FF-4EE2-4C04-90AA-45DCEFB4E700",
+  "name": "StopIISAppPool",
+  "friendlyName": "Stop IIS App Pool",
+  "description": "Stop an IIS App Pool Remotely",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "UserName",
+      "type": "string",
+      "label": "UserName",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The username to execute the App Pool Stop with."
+    },
+    {
+      "name": "Password",
+      "type": "string",
+      "label": "Password",
+      "defaultValue": "",
+	    "helpMarkDown": "The password to execute the App Pool Stop with.",
+      "required": true
+	 },
+    {
+      "name": "ServerName",
+      "type": "string",
+      "label": "Server Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The name of the server that the Application Pool is on."
+    },
+     {
+      "name": "appPoolName",
+      "type": "string",
+      "label": "Application Pool Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Name of the Application Pool to be stopped."
+    }
+  ],
+  "instanceNameFormat": "Stop Application Pool: $(ServerName) - $(appPoolName)",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\StopAppPool.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

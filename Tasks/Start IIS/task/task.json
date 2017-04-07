@@ -1,0 +1,70 @@
+{
+  "id": "60CC5EBA-BCFB-4760-9E3A-F3724724BB8F",
+  "name": "StartIISAppPool",
+  "friendlyName": "Start IIS App Pool",
+  "description": "Start an IIS App Pool Remotely",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "visibility": [
+                "Release",
+                "Build"
+                ],  
+  "author": "Total ALM",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  },
+  "demands": [
+  ],
+   "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+    ],
+	
+	"inputs": [
+    {
+      "name": "UserName",
+      "type": "string",
+      "label": "UserName",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The username to execute the App Pool start with."
+    },
+    {
+      "name": "Password",
+      "type": "string",
+      "label": "Password",
+      "defaultValue": "",
+	    "helpMarkDown": "The password to execute the App Pool start with.",
+      "required": true
+	 },
+    {
+      "name": "ServerName",
+      "type": "string",
+      "label": "Server Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The name of the server that the Application Pool is on."
+    },
+     {
+      "name": "appPoolName",
+      "type": "string",
+      "label": "Application Pool Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Name of the Application Pool to be started."
+    }
+  ],
+  "instanceNameFormat": "Start Application Pool: $(ServerName) - $(appPoolName)",
+  "execution": {
+    "Powershell": {
+      "target": "$(currentDirectory)\\StartAppPool.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
