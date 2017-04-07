@@ -1,4 +1,4 @@
-﻿[CmdletBinding(DefaultParameterSetName = 'None')]
+ [CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
 	[String] [Parameter(Mandatory = $true)] $ruleSet,
@@ -15,8 +15,8 @@ param
  
 Write-Host "Starting Code Analysis"
 
-[bool]$includeSummary = Convert-String $includeSummary Boolean
-[bool]$logging = Convert-String $logging Boolean
+[bool]$includeSummary = [boolean]$includeSummary
+[bool]$logging = [boolean]$logging
 
 $allArgs =  @()
 
@@ -75,24 +75,24 @@ $FxCopEXE = resolveFxCop
 $ruleSets = resolveRuleSets
 $xslFileTemplate = resolveXSLFileTemplate
 
-
+　
 #Compile files to run analysis
 $fileList.Split(",") | foreach {
-    Write-Host "Include file: $buildDirectory.Trim()\$_.Trim()"
+    Write-Host "Include file: $buildDirectory\$_"
 
-	 $chkdll = CheckFileDirectory -path $buildDirectory.Trim()  
+	 $chkdll = CheckFileDirectory -path $buildDirectory
 
 	if ($chkdll)
 	{
-		$dll = "/file:$buildDirectory.Trim()\$_.Trim() "
+		$dll = "/file:$buildDirectory\$_ "
 		$allArgs += $dll 
 	}
 }
 
-
+　
 $allArgs += "/ruleset:+$ruleSets\$ruleSet.ruleset"
 
-
+　
 #denotes to include summary
 if ($includeSummary)
 {
@@ -102,7 +102,7 @@ if ($includeSummary)
 #sets output file path
 $allArgs += "/out:$outputFile"
 
-
+　
 if ($logging)
 {
     $allArgs += "/verbose"
@@ -119,4 +119,6 @@ Write-Host $allArgs
 
 & $FxCopEXE $allArgs
 
-
+　
+　
+ 

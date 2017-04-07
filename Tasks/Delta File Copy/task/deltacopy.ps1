@@ -1,8 +1,9 @@
-[CmdletBinding(DefaultParameterSetName = 'None')]
+﻿[CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
 	[String] [Parameter(Mandatory = $true)] $FromDirectory,
 	[String] [Parameter(Mandatory = $true)] $ToDirectory, 
+    [Boolean] [Parameter(Mandatory = $true)] $SyncAfterCopy,
     [String] [Parameter(Mandatory = $false)] $ExcludedFileNamesCommaDelimited
 )
  
@@ -72,6 +73,40 @@ Foreach ($Directory in ($DirectoriesInFromFolder))
     }
 }
 
+function RemoveRecursive {
+param([System.IO.DirectoryInfo] $From, [System.IO.DirectoryInfo] $To) 
+
+ $FilesInToFolder = Get-ChildItem -Path $To | ? {$_.psIsContainer -eq $False}
+   
+ Foreach ($File in ($FilesInToFolder))
+    {
+		
+		 $TargetFile = [io.path]::Combine($From, $File.Name )
+         $OldFile =[io.path]::Combine($To, $File.Name )
+        
+         if(![System.IO.File]::Exists($TargetFile)){
+                # If the file doesn't exist in the from directory
+                # delete from the target directory
+                Write-Host "Deleting file $File in $ToDirectory that didn't exist in $FromDirectory"
+                Remove-Item $OldFile
+            }
+    }
+
+	$DirectoriesInFromFolder = Get-ChildItem -Path $From | where {$_.Attributes -eq 'Directory'}
+
+Foreach ($Directory in ($DirectoriesInFromFolder))
+    {
+		 $TargetDirectoryPath = [io.path]::Combine($To, $Directory.Name )
+		 $TargetDirectory = [System.IO.DirectoryInfo] $TargetDirectoryPath
+
+		 if (-Not (Test-Path $TargetDirectoryPath)){
+			 New-Item -ItemType Directory -Force -Path $TargetDirectoryPath
+		 }
+
+         CopyRecursive $Directory.FullName $TargetDirectory 
+    }
+}
+
 function CopyFile {
 param([System.IO.FileInfo] $From, [System.IO.FileInfo] $To) 
 
@@ -102,3 +137,7 @@ param([System.IO.FileInfo] $From, [System.IO.FileInfo] $To)
  }
 
  CopyRecursive $FromDirectory $ToDirectory
+ 
+ if($SyncAfterCopy -eq $true){
+    RemoveRecursive $FromDirectory $ToDirectory
+ }
