@@ -1,13 +1,8 @@
 ﻿param( 
     [string] [Parameter(Mandatory = $true)] $sqlVersion,
     [string] [Parameter(Mandatory = $true)] $dacpacfilepath,
-    [string] [Parameter(Mandatory = $true)] $useconnectionstring,
-    [string] [Parameter(Mandatory = $false)] $connectionstring,
-    [string] [Parameter(Mandatory = $true)] $sqlserver,
-    [string] [Parameter(Mandatory = $true)] $databasename,
-    [string] [Parameter(Mandatory = $true)] $windowsAuth,
-    [string] [Parameter(Mandatory = $true)] $userid,
-    [string] [Parameter(Mandatory = $true)] $password,
+    [string] [Parameter(Mandatory = $true)] $connectionstring,
+    [string] [Parameter(Mandatory = $true)] $databaseName,
     [string] [Parameter(Mandatory = $true)] $blockdataloss = $false,
     [string] [Parameter(Mandatory = $true)] $allowincompatableplatform,
     [string] [Parameter(Mandatory = $true)] $ignorefileandlogpaths,
@@ -18,11 +13,8 @@
         ) 
 
 Write-Host "Deploying the DB with the following settings" 
-Write-Host "sqlserver:   $sqlserver" 
 Write-Host "dacpac: $dacpacfilepath" 
-Write-Host "dbname: $databasename" 
-Write-Host "userID: $userid"
-Write-Host "Password: $password"
+Write-Host "connection String: $connectionstring"
 Write-Host "Include Composite Objects: $includecompositeobjects"
 Write-Host "Ignore File Size: $ignorefilesize"
 Write-Host "Ignore File Group Placement: $ignorefilegroupplacement"
@@ -48,15 +40,15 @@ if ($dacpacdlloverride -eq "")
 {
     if ($sqlVersion -eq "2014")
     {
-        $toolsdll = $filePath + "2014\Microsoft.Data.Tools.Schema.Sql.dll"
+        $toolsdll = $filePath
         add-type -path "$toolsdll"
-        $dacpacdlloverride = $filePath + "2014\Microsoft.SqlServer.Dac.dll"
+        $dacpacdlloverride = $filePath
         Write-Host $dacpacdlloverride
         add-type -path "$dacpacdlloverride"
     }
     elseif ($sqlVersion -eq "2008r2")
     {
-        $dacpacdlloverride = $filePath + "2008r2\Microsoft.SqlServer.Dac.dll"
+        $dacpacdlloverride = $filePath
         Write-Host $dacpacdlloverride
         add-type -path "$dacpacdlloverride"
     }
@@ -65,19 +57,6 @@ if ($dacpacdlloverride -eq "")
 # load in DAC DLL (requires config file to support .NET 4.0) 
  # change file location for a 32-bit OS 
   add-type -path "$dacpacdlloverride"
-
-# make DacServices object, needs a connection string 
-if ($useconnectionstring -eq $false)
-{
-    if ($windowsAuth -eq $true)
-    {
-        $connectionstring = "server=$sqlserver;integrated security=true"
-    }
-    else
-    {
-        $connectionstring = "server=$sqlserver;User ID=$userid;Password=$password;integrated security=false"
-    }
-}
 
 Write-Host "Connection String: $connectionstring"
 
@@ -99,7 +78,7 @@ Try
 {
 # Load dacpac from file & deploy to database named pubsnew 
  $dp = [Microsoft.SqlServer.Dac.DacPackage]::Load($dacpacfilepath) 
- $d.Deploy($dp, $databasename, $true, $DeployOptions) # the true is to allow an upgrade, could be parameterised, also can add further deploy params
+ $d.Deploy($dp, $databaseName, $true, $DeployOptions) # the true is to allow an upgrade, could be parameterised, also can add further deploy params
  Write-Host "Deployed Successful"
  }
  catch [System.Exception]
@@ -110,6 +89,7 @@ Try
   } else {
     Write-Host $_.Exception.Message
   }
+  throw [System.IO.FileNotFoundException] $_.Exception.Message
 
  }
 

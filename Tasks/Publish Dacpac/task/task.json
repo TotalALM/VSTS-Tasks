@@ -11,9 +11,9 @@
                 ],  
   "author": "Total ALM",
   "version": {
-    "Major": 1,
-    "Minor": 0,
-    "Patch": 0
+    "Major": 3,
+    "Minor": 2,
+    "Patch": 2
   },
   "demands": [
   ],
@@ -28,7 +28,7 @@
 	"inputs": [
     {
       "name": "sqlVersion",
-      "type": "picklist",
+      "type": "pickList",
       "label": "SQL Version",
       "defaultValue": "2014",
       "required": true,
@@ -46,18 +46,6 @@
 	    "helpMarkDown": "The file path of the DacPac",
       "required": true
 	 },
-    {
-      "name": "useconnectionstring",
-      "type": "picklist",
-      "label": "Use Connection String",
-      "defaultValue": "True",
-      "required": true,
-      "options": {
-        "Yes":"True",
-        "No":"False"
-      },
-      "helpMarkDown": "Whether you want to provide a connection string or not for this connection."
-    },
      {
       "name": "connectionstring",
       "type": "string",
@@ -66,53 +54,17 @@
       "required": true,
       "helpMarkDown": "The connection string that should be leveraged for publishing the dacpac."
     },
-    {
-      "name": "sqlserver",
-      "type": "string",
-      "label": "Server Name",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "The name of the server to publish to."
-    },
-    {
-      "name": "databasename",
+     {
+      "name": "databaseName",
       "type": "string",
       "label": "Database Name",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "The name of the database to publish to."
-    },
-    {
-      "name": "windowsAuth",
-      "type": "picklist",
-      "label": "Windows Authentication",
-      "defaultValue": "",
-      "required": true,
-      "options":{
-        "Yes":"True",
-        "No":"False"
-      },
-      "helpMarkDown": "Whether or not to use windows authentication"
-    },
-    {
-      "name": "userid",
-      "type": "string",
-      "label": "UserName",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "Username to log into the database with"
-    },
-    {
-      "name": "password",
-      "type": "string",
-      "label": "Password",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "Password to log into the database with."
+      "helpMarkDown": "The name of the target database."
     },
     {
       "name": "blockdataloss",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Block Data Loss",
       "defaultValue": "False",
       "required": true,
@@ -120,11 +72,12 @@
         "Yes":"True",
         "No":"False" 
       },
+      "groupName":"advanced",
       "helpMarkDown": "Do you want to block data loss when publishing this dacpac."
     },
     {
       "name": "allowincompatableplatform",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Allow Incompatiable platform",
       "defaultValue": "True",
       "required": true,
@@ -132,11 +85,12 @@
         "Yes":"True",
         "No":"False"
       },
+      "groupName":"advanced",
       "helpMarkDown": "Whether or not you want to prevent publishing if the dacpac and server don't have the same platform."
     },
     {
       "name": "ignorefileandlogpaths",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Ignore File and Log Paths",
       "defaultValue": "True",
       "required": true,
@@ -144,11 +98,12 @@
         "Yes":"True",
         "No":"False"
       },
+      "groupName":"advanced",
       "helpMarkDown": "Whether or not to ignore the file and log paths when publishing."
     },
     {
       "name": "ignorefilegroupplacement",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Ignore File Group Placement",
       "defaultValue": "True",
       "required": true,
@@ -156,11 +111,12 @@
         "Yes":"True",
         "No":"False"
       },
+      "groupName":"advanced",
       "helpMarkDown": "Ignore file group placement."
     },
     {
       "name": "ignorefilesize",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Ignore File Size",
       "defaultValue": "True",
       "required": true,
@@ -168,11 +124,12 @@
         "Yes":"True",
         "No":"False"
       },
+      "groupName":"advanced",
       "helpMarkDown": "Ignore file size."
     },
     {
       "name": "includecompositeobjects",
-      "type": "picklist",
+      "type": "pickList",
       "label": "Include Composite Objects",
       "defaultValue": "True",
       "required": true,
@@ -180,6 +137,7 @@
         "Yes":"True",
         "No":"False"
       },
+      "groupName":"advanced",
       "helpMarkDown": "Whether or not to include composite objects"
     },
     {
@@ -188,7 +146,8 @@
       "label": "Location of DacPac DLL in SQL Server",
       "defaultValue": "C:\\Program Files (x86)\\Microsoft SQL Server\\120\\DAC\\bin\\Microsoft.SqlServer.Dac.dll",
       "required": true,
-      "helpMarkDown": "Whether or not to include composite objects"
+      "helpMarkDown": "Whether or not to include composite objects",
+      "groupName":"advanced"
     }
   ],
   "instanceNameFormat": "Publish DacPac",
