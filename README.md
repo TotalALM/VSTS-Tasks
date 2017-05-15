@@ -6,6 +6,9 @@ Follow the below steps to upload this task to your account:
 * Extract the zip file of the desired task
 * Open command prompt and navigate to the folder that contains a json and powershell files.
 
+## License
+These tasks leverage the Apache 2.0 License.  Details can be found [here](https://www.apache.org/licenses/LICENSE-2.0.html)
+
 ## Install / Upload Custom Task
 
 *Follow instructions on how to upload the task using - https://github.com/Microsoft/tfs-cli/blob/master/docs/buildtasks.md or use the below instructions.
