@@ -57,7 +57,7 @@ function ProcessMatches($fileMatches)
             Foreach-Object {
                 $_ -replace $match,$matchValue
             } | 
-            Set-Content $tempFile -Force -Encoding $fileEncoding
+            Out-File $tempFile -Force -Encoding $fileEncoding
 		}
 	
 		Copy-Item -Force $tempFile $targetFileMatch.FullName
