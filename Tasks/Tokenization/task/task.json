@@ -50,6 +50,14 @@
             "helpMarkDown": "Recursively Search through all folders."
         },
         {
+            "name": "RequireVariable",
+            "type": "boolean",
+            "label": "Require Variable",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Require variables to be present when tokenizing."
+        },
+        {
             "name": "TokenStart",
             "type": "string",
             "label": "Token Placeholder Start",

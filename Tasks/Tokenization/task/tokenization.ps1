@@ -1,11 +1,12 @@
-﻿[CmdletBinding(DefaultParameterSetName = 'None')]
+[CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
     [String] [Parameter(Mandatory = $true)] $SourcePath,
 	[String] [Parameter(Mandatory = $true)] $TargetFileNames,
 	[String] [Parameter(Mandatory = $false)] $RecursiveSearch,
     [String] [Parameter(Mandatory = $true)] $TokenStart,
-    [String] [Parameter(Mandatory = $true)] $TokenEnd
+    [String] [Parameter(Mandatory = $true)] $TokenEnd,
+    [String] [Parameter(Mandatory = $false)] $RequireVariable
 )
 
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal" 
@@ -36,9 +37,8 @@ function ProcessMatches($fileMatches)
 		
 		Copy-Item -Force $targetFileMatch.FullName $tempFile
 	
-		$matches = select-string -Path $tempFile -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
-		ForEach($match in $matches)
-		{
+        $matches = select-string -Path $tempFile -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
+        ForEach ($match in $matches) {
             $matchedItem = $match
             $matchedItem = $matchedItem.TrimStart($TokenStart)
             $matchedItem = $matchedItem.TrimEnd($TokenEnd)
@@ -47,6 +47,10 @@ function ProcessMatches($fileMatches)
             Write-Host (Get-LocalizedString -Key 'Token {0}...' -ArgumentList $matchedItem) -ForegroundColor Green
         
             $matchValue = Get-TaskVariable $distributedTaskContext $matchedItem
+
+            if ([System.Convert]::ToBoolean($RequireVariable) -and !$matchValue) {
+                throw "$matchedItem variable not set"
+            }
         
             Write-Host (Get-LocalizedString -Key 'Token Value: {0}...' -ArgumentList $matchValue) -ForegroundColor Green
         
@@ -65,7 +69,6 @@ function ProcessMatches($fileMatches)
 function Get-FileEncoding($targetFilePath)
 {
  [byte[]]$byte = get-content -Encoding byte -ReadCount 4 -TotalCount 4 -Path $targetFilePath
- #Write-Host Bytes: $byte[0] $byte[1] $byte[2] $byte[3]
  
  # EF BB BF (UTF8)
  if ( $byte[0] -eq 0xef -and $byte[1] -eq 0xbb -and $byte[2] -eq 0xbf )
@@ -116,6 +119,7 @@ function Get-FileEncoding($targetFilePath)
 }
 
 Write-Host (Get-LocalizedString -Key 'RecursiveSearch: {0}...' -ArgumentList $RecursiveSearch)
+Write-Host (Get-LocalizedString -Key 'RequireVariable: {0}...' -ArgumentList $RequireVariable)
 
 $targetedFiles = $TargetFileNames.Split(',')
 
