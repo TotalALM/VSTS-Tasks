@@ -12,7 +12,7 @@ import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common" 
 
 $patterns = @()
-$regex = $TokenStart + '[A-Za-z0-9.]*' + $TokenEnd
+$regex = $TokenStart + '([A-Za-z0-9.]*|_)*' + $TokenEnd
 $matches = @()
 
 Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
