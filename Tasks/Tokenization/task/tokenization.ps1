@@ -8,6 +8,9 @@ param
     [String] [Parameter(Mandatory = $true)] $TokenEnd
 )
 
+import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal" 
+import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common" 
+
 $patterns = @()
 $regex = $TokenStart + '[A-Za-z0-9.]*' + $TokenEnd
 $matches = @()
@@ -16,16 +19,10 @@ Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
 Write-Host (Get-LocalizedString -Key 'Source Path: {0}...' -ArgumentList $SourcePath)
 Write-Host (Get-LocalizedString -Key 'Target File Name: {0}...' -ArgumentList $TargetFileName)
 
-import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal" 
-import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common" 
-
-
 function ProcessMatches($fileMatches)
-{ 
-	
+{
 	ForEach($targetFileMatch in $fileMatches)
 	{
-		
 	    $fileEncoding = Get-FileEncoding($targetFileMatch.FullName)
 	
 	    Write-Host (Get-LocalizedString -Key 'Targeted FileName Encoding: {0}...' -ArgumentList $fileEncoding)
@@ -63,12 +60,10 @@ function ProcessMatches($fileMatches)
 		Copy-Item -Force $tempFile $targetFileMatch.FullName
 		Remove-Item -Force $tempFile	
 	}
-
 }
 
 function Get-FileEncoding($targetFilePath)
 {
-
  [byte[]]$byte = get-content -Encoding byte -ReadCount 4 -TotalCount 4 -Path $targetFilePath
  #Write-Host Bytes: $byte[0] $byte[1] $byte[2] $byte[3]
  
@@ -120,8 +115,6 @@ function Get-FileEncoding($targetFilePath)
  { return 'ASCII' }
 }
 
-
-
 Write-Host (Get-LocalizedString -Key 'RecursiveSearch: {0}...' -ArgumentList $RecursiveSearch)
 
 $targetedFiles = $TargetFileNames.Split(',')
@@ -130,7 +123,7 @@ ForEach($targetedFileName in $targetedFiles)
 {
 	Write-Host (Get-LocalizedString -Key 'Targeted FileName: {0}...' -ArgumentList $targetedFileName)
 		
-	If ([System.Convert]::ToBoolean($RecursiveSearch))
+	if ([System.Convert]::ToBoolean($RecursiveSearch))
 	{	
 		$fileMatches = Get-ChildItem -Path $SourcePath -Filter $targetedFileName -Recurse
 		
@@ -143,6 +136,3 @@ ForEach($targetedFileName in $targetedFiles)
 		ProcessMatches($fileMatches)	
 	}
 }
-
-
-
