@@ -76,19 +76,19 @@ function Get-FileEncoding($targetFilePath)
  
  # FE FF  (UTF-16 Big-Endian)
  elseif ($byte[0] -eq 0xfe -and $byte[1] -eq 0xff)
- { return 'Unicode UTF-16 Big-Endian' }
+ { return 'BigEndianUnicode' }
  
  # FF FE  (UTF-16 Little-Endian)
  elseif ($byte[0] -eq 0xff -and $byte[1] -eq 0xfe)
- { return 'Unicode UTF-16 Little-Endian' }
+ { return 'Unicode' }
  
  # 00 00 FE FF (UTF32 Big-Endian)
  elseif ($byte[0] -eq 0 -and $byte[1] -eq 0 -and $byte[2] -eq 0xfe -and $byte[3] -eq 0xff)
- { return 'UTF32 Big-Endian' }
+ { return 'UTF32' }
  
  # FE FF 00 00 (UTF32 Little-Endian)
  elseif ($byte[0] -eq 0xfe -and $byte[1] -eq 0xff -and $byte[2] -eq 0 -and $byte[3] -eq 0)
- { return 'UTF32 Little-Endian' }
+ { return 'UTF32' }
  
  # 2B 2F 76 (38 | 38 | 2B | 2F)
  elseif ($byte[0] -eq 0x2b -and $byte[1] -eq 0x2f -and $byte[2] -eq 0x76 -and ($byte[3] -eq 0x38 -or $byte[3] -eq 0x39 -or $byte[3] -eq 0x2b -or $byte[3] -eq 0x2f) )
@@ -96,23 +96,23 @@ function Get-FileEncoding($targetFilePath)
  
  # F7 64 4C (UTF-1)
  elseif ( $byte[0] -eq 0xf7 -and $byte[1] -eq 0x64 -and $byte[2] -eq 0x4c )
- { return 'UTF-1' }
+ { return 'Unknown' }
  
  # DD 73 66 73 (UTF-EBCDIC)
  elseif ($byte[0] -eq 0xdd -and $byte[1] -eq 0x73 -and $byte[2] -eq 0x66 -and $byte[3] -eq 0x73)
- { return 'UTF-EBCDIC' }
+ { return 'Unknown' }
  
  # 0E FE FF (SCSU)
  elseif ( $byte[0] -eq 0x0e -and $byte[1] -eq 0xfe -and $byte[2] -eq 0xff )
- { return 'SCSU' }
+ { return 'Unknown' }
  
  # FB EE 28  (BOCU-1)
  elseif ( $byte[0] -eq 0xfb -and $byte[1] -eq 0xee -and $byte[2] -eq 0x28 )
- { return 'BOCU-1' }
+ { return 'Unknown' }
  
  # 84 31 95 33 (GB-18030)
  elseif ($byte[0] -eq 0x84 -and $byte[1] -eq 0x31 -and $byte[2] -eq 0x95 -and $byte[3] -eq 0x33)
- { return 'GB-18030' }
+ { return 'Unknown' }
  
  else
  { return 'ASCII' }
