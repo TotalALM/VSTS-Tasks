@@ -30,6 +30,7 @@ Follow the below steps to upload this task to your account:
 | Target Filenames | The target filenames (comma-delimited) that have tokens replaced by user-defined variables. Wild card searching is support.  Example: Web.config or *.config or Settings.xml, *.config | Yes |
 | Recursive Search | Recursively Search through all folders in the Source Path  | Yes |
 | Token Placeholder Start | The token place holder at the front of the variable name. [__]<variable-name>__ | Yes |
+| Token Regex | The token regex to match the variable name. __[<variable-name>]__ | Yes |
 | Token Placeholder End | The token place holder at the end of the variable name.  __<variable-name>[__] | Yes |
 
 ![tfs-cli](docs/TokenizationValues.png "Tokenization Options")

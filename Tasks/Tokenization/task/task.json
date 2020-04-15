@@ -66,6 +66,14 @@
             "required": true
         },
         {
+            "name": "TokenRegex",
+            "type": "string",
+            "label": "Token Regex",
+            "defaultValue": "([A-Za-z0-9.]*|_)*",
+            "helpMarkDown": "The token regex to match the variable name. __[<variable-name>]__",
+            "required": true
+        },
+        {
             "name": "TokenEnd",
             "type": "string",
             "label": "Token Placeholder End",
