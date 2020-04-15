@@ -5,6 +5,7 @@ param
 	[String] [Parameter(Mandatory = $true)] $TargetFileNames,
 	[String] [Parameter(Mandatory = $false)] $RecursiveSearch,
     [String] [Parameter(Mandatory = $true)] $TokenStart,
+    [String] [Parameter(Mandatory = $true)] $TokenRegex
     [String] [Parameter(Mandatory = $true)] $TokenEnd,
     [String] [Parameter(Mandatory = $false)] $RequireVariable
 )
@@ -13,7 +14,7 @@ import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common" 
 
 $patterns = @()
-$regex = $TokenStart + '([A-Za-z0-9.]*|_)*' + $TokenEnd
+$regex = $TokenStart + $TokenRegex + $TokenEnd
 $matches = @()
 
 Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
