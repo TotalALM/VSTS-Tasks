@@ -29,8 +29,8 @@ function ProcessMatches($fileMatches)
 
         $tempString = Get-Content -Path $targetFileMatch.FullName -Encoding $fileEncoding
 
-        $matches = $tempString | select-string -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
-        ForEach ($match in $matches) {
+        $allMatches = $tempString | select-string -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
+        ForEach ($match in $allMatches) {
             $matchedItem = $match
             $matchedItem = $matchedItem.TrimStart($TokenStart)
             $matchedItem = $matchedItem.TrimEnd($TokenEnd)
