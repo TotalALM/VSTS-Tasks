@@ -12,13 +12,11 @@ param
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
 
-$patterns = @()
 $regex = $TokenStart + '([A-Za-z0-9.]*|_)*' + $TokenEnd
-$matches = @()
 
 Write-Host (Get-LocalizedString -Key 'Regex: {0}...' -ArgumentList $regex)
 Write-Host (Get-LocalizedString -Key 'Source Path: {0}...' -ArgumentList $SourcePath)
-Write-Host (Get-LocalizedString -Key 'Target File Name: {0}...' -ArgumentList $TargetFileName)
+Write-Host (Get-LocalizedString -Key 'Target File Name: {0}...' -ArgumentList $TargetFileNames)
 
 function ProcessMatches($fileMatches)
 {
@@ -28,7 +26,6 @@ function ProcessMatches($fileMatches)
 
         Write-Host (Get-LocalizedString -Key 'Targeted FileName Encoding: {0}...' -ArgumentList $fileEncoding)
 
-        $targetFilePath = $targetFileMatch.Directory.FullName
         $tempFile = $targetFileMatch.FullName + '.tmp'
 
         #Write-Host (Get-LocalizedString -Key 'Target File Path: {0}...' -ArgumentList $targetFilePath)
