@@ -25,16 +25,11 @@ function ProcessMatches($fileMatches)
         $fileEncoding = Get-FileEncoding($targetFileMatch.FullName)
 
         Write-Host (Get-LocalizedString -Key 'Targeted FileName Encoding: {0}...' -ArgumentList $fileEncoding)
-
-        $tempFile = $targetFileMatch.FullName + '.tmp'
-
-        #Write-Host (Get-LocalizedString -Key 'Target File Path: {0}...' -ArgumentList $targetFilePath)
         Write-Host (Get-LocalizedString -Key 'Target File Match: {0}...' -ArgumentList $targetFileMatch.FullName)
-        Write-Host (Get-LocalizedString -Key 'Temp File: {0}...' -ArgumentList $tempFile)
 
-        Copy-Item -Force $targetFileMatch.FullName $tempFile
+        $tempString = Get-Content -Path $targetFileMatch.FullName -Encoding $fileEncoding
 
-        $matches = select-string -Path $tempFile -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
+        $matches = $tempString | select-string -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value }
         ForEach ($match in $matches) {
             $matchedItem = $match
             $matchedItem = $matchedItem.TrimStart($TokenStart)
@@ -51,15 +46,13 @@ function ProcessMatches($fileMatches)
 
             Write-Host (Get-LocalizedString -Key 'Token Value: {0}...' -ArgumentList $matchValue) -ForegroundColor Green
 
-            (Get-Content $tempFile) |
+            $tempString = $tempString |
                 Foreach-Object {
                     $_ -replace $match,$matchValue
-                } |
-                Out-File $tempFile -Force -Encoding $fileEncoding
+                }
         }
 
-        Copy-Item -Force $tempFile $targetFileMatch.FullName
-        Remove-Item -Force $tempFile
+        $tempString | Out-File $targetFileMatch.FullName -Force -Encoding $fileEncoding
     }
 }
 
